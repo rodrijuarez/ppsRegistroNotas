@@ -1,0 +1,478 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UTN.Framework</name>
+    </assembly>
+    <members>
+        <member name="T:UTN.Framework.ExceptionManagement.ExceptionManager">
+            <summary>
+            Implement the exception managament estrategy.
+            </summary>
+            <remarks>
+            <b>Exception management</b><br/><br/>
+            In order to create easily managed and adminstrative applications, a consistent Exception management policy must be applied:
+            The Exception Management goals are:
+            <ul>
+                <li>Catch Exceptions</li>
+                <li>Logg and report contextual information about the Exception thrown</li>
+            </ul>
+            </remarks>
+            <example>
+            El siguiente ejemplo de código ilustra la forma de utilización del UTN Exception Manager en las capas de una aplicación
+            <code>
+            using System;
+            using System.Data.SqlClient;
+            using UTN.Framework.ExceptionManagement;
+            using System.Collections;
+            
+            namespace Test
+            {
+            public class Errores
+            	{
+            		// Capa de Interfaz de usuario
+            		public void UserInterface()
+            		{
+            			try
+            			{
+            				ConsultarSaldo("Juan");
+            			}
+            			catch(Exception ex)
+            			{
+            				//LLama al Exception Manager
+            				UTNException tqEx = ExceptionManager.Handle(ex);
+            				//La capa de interfaz de usuario muestra el mensaje y el tracking id del error sucedido
+            				if (UTNEx.Show)
+            					Console.WriteLine("Mensaje: {0}\r\nTrackingId:{1}\r\n", UTNEx.Message, UTNEx.TrackingId);
+            			}
+            			finally
+            			{
+            				Console.ReadLine();
+            			}
+            		}
+            
+            
+            		// Capa de Logicas de Negocio
+            		public void ConsultarSaldo(string Cliente)
+            		{
+            			if (Cliente == "Yo")
+            				throw new UTNException("Yo no soy Cliente");
+            			try
+            			{
+            				AbrirConeccion(1, 2);
+            			}
+            			catch(Exception ex)
+            			{
+            				//LLama al Exception Manager
+            				throw ExceptionManager.Handle(ex);
+            			}
+            		}
+            
+                    // Capa de Acceso a Datos
+            		public void AbrirConeccion(int param1, int param2)
+            		{	
+            			try
+            			{
+            				SqlConnection conn = new SqlConnection();
+            				conn.Open();
+            			}
+            			catch(Exception ex)
+            			{
+            				//Llama al Exception Manager, pasándole información adicional de contexto.
+            				Hashtable addinfo = new Hashtable();
+            				addinfo.Add("Param1", 1);
+            				addinfo.Add("Param2", 2);
+            				throw ExceptionManager.Handle(ex, addinfo);
+            			}
+            		}
+            	}
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.ExceptionManager.#ctor">
+            <summary>
+            Instances of the ExceptionManager class are not allowed
+            </summary>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.ExceptionManager.Handle(System.Exception)">
+            <summary>
+            Wrap an exception into a UTNException
+            </summary>
+            <param name="exception">Exception to handle</param>
+            <returns>A customized UTNException</returns>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.ExceptionManager.Handle(System.Exception,System.String)">
+            <summary>
+            Wrap an exception into a UTNException
+            </summary>
+            <param name="exception">Exception to handle</param>
+            <param name="message">Provides a translated message taking precedence over the rules</param>
+            <returns>A customized UTNException</returns>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.ExceptionManager.Handle(System.Exception,System.Collections.Hashtable)">
+            <summary>
+            Wrap an exception into a UTNException
+            </summary>
+            <param name="exception">Exception to handle</param>
+            <param name="additionalInfo">Hasthtable with additional user define information</param>
+            <returns>A customized UTNException</returns>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.ExceptionManager.Handle(System.Exception,System.String,System.Collections.Hashtable)">
+            <summary>
+            Wrap an exception into a UTNException
+            </summary>
+            <param name="exception">Exception to handle</param>
+            <param name="message">Provides a translated message taking precedence over the rules</param>
+            <param name="additionalInfo">Hasthtable with additional user define information</param>
+            <returns>A customized UTNException</returns>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.ExceptionManager.HandleInternal(System.Exception,System.String,System.Collections.Hashtable)">
+            <summary>
+            Private Handle method used by all the overloaded public methods
+            </summary>
+            <param name="exception">Exception to handle</param>
+            <param name="message">Provides a translated message taking precedence over the rules</param>
+            <param name="additionalInfo">Hasthtable with additional user define information</param>
+            <returns>A customized UTNException</returns>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.ExceptionManager.LogException(UTN.Framework.ExceptionManagement.UTNException)">
+            <summary>
+            Logs a UTNException with detailed info
+            </summary>
+            <param name="UTNEx">Exception to log</param>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.ExceptionManager.FormatStackTrace(System.String)">
+            <summary>
+            Format the stack trace stored in the exception
+            to show until reach the first method in the System namespace
+            </summary>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.ExceptionManager.FormatCallStack">
+            <summary>
+            Gets the call stack by reflection
+            </summary>
+        </member>
+        <member name="T:UTN.Framework.ExceptionManagement.UTNException">
+            <summary>
+            UTNException base class for al UTN Application Exceptions
+            </summary>
+            <remarks>
+            Any thrown Exception fom a UTN Application must inherits from UTNException
+            </remarks>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.UTNException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates a new instance of the UTNException class
+            </summary>
+            <param name="message">Message explaining the reason for the exception</param>
+            <param name="innerException">Original exception</param>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.UTNException.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the UTNException class
+            </summary>
+            <param name="message">Message explaining the reason for the exception</param>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.UTNException.SetAdditionalInfo(System.Collections.Hashtable)">
+            <summary>
+            Sets the AdditionalInfo property
+            This property can be only changed into the framework
+            </summary>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.UTNException.SetShow(System.Boolean)">
+            <summary>
+            Sets the Show property
+            This property can be only changed from inside the framework
+            </summary>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.UTNException.SetCustomized(System.Boolean)">
+            <summary>
+            Sets the Customized property
+            This property can be only changed from inside the framework
+            </summary>
+        </member>
+        <member name="P:UTN.Framework.ExceptionManagement.UTNException.AdditionalInfo">
+            <summary>
+            Gets the hashtable containing additional user define information
+            </summary>
+            <remarks>
+            Useful for logging parameter values or variable state during a method
+            </remarks>
+        </member>
+        <member name="P:UTN.Framework.ExceptionManagement.UTNException.Show">
+            <summary>
+            Gets if this exception is intended to be shown
+            </summary>
+            <remarks>Default = true</remarks>
+        </member>
+        <member name="P:UTN.Framework.ExceptionManagement.UTNException.Customized">
+            <summary>
+            Gets if the exception message has been customized
+            </summary>
+            <remarks>
+            Customization occurs during Exception management. If the Exception matches the rule specified in the UTNExceptionRules.xml, then it is converted into a UTNException and its message is replaced.
+            </remarks>
+        </member>
+        <member name="P:UTN.Framework.ExceptionManagement.UTNException.TrackingId">
+            <summary>
+            Gets the unique identification of this exception
+            </summary>
+            <remarks>
+            Useful for tracking errors reported by users with logged exceptions
+            </remarks>
+        </member>
+        <member name="T:UTN.Framework.ExceptionManagement.UTNExceptionRule">
+            <summary>
+            Represents an exception rule as defined in the UTNExceptionRule xml file
+            </summary>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.UTNExceptionRule.#ctor">
+            <summary>
+            Creates a new instance of the UTNExceptionRule class
+            using default properties 
+            </summary>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.UTNExceptionRule.Initialize(System.Xml.XmlNode)">
+            <summary>
+            Loads the rule from an xml node
+            </summary>
+            <param name="exceptionRuleNode">Xml node to load</param>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.UTNExceptionRule.IsMatch(System.String)">
+            <summary>
+            Indicates when a message exception matches with this rule.
+            </summary>
+            <param name="originalMessage">Message to compare</param>
+            <returns>true if message matches this rule</returns>
+        </member>
+        <member name="P:UTN.Framework.ExceptionManagement.UTNExceptionRule.Show">
+            <summary>
+            Gets if exceptions matching this rule are intended to be shown
+            </summary>
+        </member>
+        <member name="P:UTN.Framework.ExceptionManagement.UTNExceptionRule.Message">
+            <summary>
+            Gets the customized message defined for the exceptions matching this rule.
+            </summary>
+        </member>
+        <member name="T:UTN.Framework.ExceptionManagement.UTNExceptionRules">
+            <summary>
+            Manage the xml file containing the rules for message customization
+            </summary>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.UTNExceptionRules.#ctor">
+            <summary>
+            Create a new instance of the UTNExceptionRules class
+            </summary>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.UTNExceptionRules.Find(System.Exception)">
+            <summary>
+            Search a rule matching for the especified exception
+            </summary>
+            <param name="ex">Exception for rule searching</param>
+            <returns>A UTNExceptionRule object or null if rule was not found</returns>
+        </member>
+        <member name="M:UTN.Framework.ExceptionManagement.UTNExceptionRules.FindRecursive(System.Exception,System.Type)">
+            <summary>
+            Recursive search trying to match a rule 
+            scanning all the parent types until reach the "System.Exception" type.
+            </summary>
+            <param name="ex">Exception for rule searching</param>
+            <param name="type">Current type of the exception</param>
+            <returns>A UTNExceptionRule object or null after System.Exception has been reached</returns>
+            <remarks>
+            This method is only called from the internal Find method
+            </remarks>
+        </member>
+        <member name="T:UTN.Framework.Logging.IPublisher">
+            <summary>
+            Defines the publisher interface for the logger provider
+            </summary>
+        </member>
+        <member name="M:UTN.Framework.Logging.IPublisher.Debug(System.Object)">
+            <summary>
+            Logs a message object as Debug
+            </summary>
+            <param name="message">Message object</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.IPublisher.DebugFormat(System.String,System.Object[])">
+            <summary>
+            Logs a message string as Debug using the System.String.Format(string, object) syntax
+            </summary>
+            <param name="format">Message string</param>
+            <param name="args">Optional object arguments</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.IPublisher.Info(System.Object)">
+            <summary>
+            Logs a message object as Info
+            </summary>
+            <param name="message">Message object</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.IPublisher.InfoFormat(System.String,System.Object[])">
+            <summary>
+            Logs a message string as Info using the System.String.Format(string, object) syntax
+            </summary>
+            <param name="format">Message string</param>
+            <param name="args">Optional object arguments</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.IPublisher.Warning(System.Object)">
+            <summary>
+            Logs a message object as Warning
+            </summary>
+            <param name="message">Message object</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.IPublisher.WarningFormat(System.String,System.Object[])">
+            <summary>
+            Logs a message string as Warning using the System.String.Format(string, object) syntax
+            </summary>
+            <param name="format">Message string</param>
+            <param name="args">Optional object arguments</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.IPublisher.Error(System.Object)">
+            <summary>
+            Logs a message object as Error
+            </summary>
+            <param name="message">Message object</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.IPublisher.ErrorFormat(System.String,System.Object[])">
+            <summary>
+            Logs a message string as Error using the System.String.Format(string, object) syntax
+            </summary>
+            <param name="format">Message string</param>
+            <param name="args">Optional object arguments</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.IPublisher.Fatal(System.Object)">
+            <summary>
+            Logs a message object as Fatal
+            </summary>
+            <param name="message">Message object</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.IPublisher.FatalFormat(System.String,System.Object[])">
+            <summary>
+            Logs a message string as Fatal using the System.String.Format(string, object) syntax
+            </summary>
+            <param name="format">Message string</param>
+            <param name="args">Optional object arguments</param>
+        </member>
+        <member name="T:UTN.Framework.Logging.Log4NetPublisher">
+            <summary>
+            Log4Net logging provider class
+            </summary>
+            <remarks>For configuration options see log4net documentation</remarks>
+        </member>
+        <member name="M:UTN.Framework.Logging.Log4NetPublisher.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="loggerName"></param>
+        </member>
+        <member name="M:UTN.Framework.Logging.Log4NetPublisher.Debug(System.Object)">
+            <summary>
+            Logs a message object as Debug
+            </summary>
+            <param name="message">Message object</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.Log4NetPublisher.DebugFormat(System.String,System.Object[])">
+            <summary>
+            Logs a message string as Debug using the System.String.Format(string, object) syntax
+            </summary>
+            <param name="format">Message string</param>
+            <param name="args">Optional object arguments</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.Log4NetPublisher.Info(System.Object)">
+            <summary>
+            Logs a message object as Info
+            </summary>
+            <param name="message">Message object</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.Log4NetPublisher.InfoFormat(System.String,System.Object[])">
+            <summary>
+            Logs a message string as Info using the System.String.Format(string, object) syntax
+            </summary>
+            <param name="format">Message string</param>
+            <param name="args">Optional object arguments</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.Log4NetPublisher.Warning(System.Object)">
+            <summary>
+            Logs a message object as Warning
+            </summary>
+            <param name="message">Message object</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.Log4NetPublisher.WarningFormat(System.String,System.Object[])">
+            <summary>
+            Logs a message string as Warning using the System.String.Format(string, object) syntax
+            </summary>
+            <param name="format">Message string</param>
+            <param name="args">Optional object arguments</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.Log4NetPublisher.Error(System.Object)">
+            <summary>
+            Logs a message object as Error
+            </summary>
+            <param name="message">Message object</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.Log4NetPublisher.ErrorFormat(System.String,System.Object[])">
+            <summary>
+            Logs a message string as Error using the System.String.Format(string, object) syntax
+            </summary>
+            <param name="format">Message string</param>
+            <param name="args">Optional object arguments</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.Log4NetPublisher.Fatal(System.Object)">
+            <summary>
+            Logs a message object as Fatal
+            </summary>
+            <param name="message">Message object</param>
+        </member>
+        <member name="M:UTN.Framework.Logging.Log4NetPublisher.FatalFormat(System.String,System.Object[])">
+            <summary>
+            Logs a message string as Fatal using the System.String.Format(string, object) syntax
+            </summary>
+            <param name="format">Message string</param>
+            <param name="args">Optional object arguments</param>
+        </member>
+        <member name="T:UTN.Framework.Logging.Logger">
+            <summary>
+            Logger factory class
+            </summary>
+            <example>
+            How to log a message by using the defualt logger:
+            <code>
+                Logger.Default.Info("This is an informational message");
+            </code>
+            
+            How to log a message by using a specific logger
+            <code>
+                IPublisher log = Logger.GetPublisher("General");
+                log.Info("This is an informational message");
+            </code>
+            </example>
+        </member>
+        <member name="M:UTN.Framework.Logging.Logger.#ctor">
+            <summary>
+            Private constructor
+            </summary>
+        </member>
+        <member name="M:UTN.Framework.Logging.Logger.GetPublisher(System.String)">
+            <summary>
+            Gets a publisher by Name
+            </summary>
+            <param name="loggerName">Logger Name Section</param>
+            <remarks>
+            The logger Name section depends on the provider
+            log4net: Is the appender name &lt;appender name="RollingLogFileAppender"&gt;
+            </remarks>
+        </member>
+        <member name="M:UTN.Framework.Logging.Logger.Purge(System.Int32)">
+            <summary>
+            Purges old files in the .\Logs directory
+            </summary>
+            <param name="daysToPreserve">How much days the files should be preserved</param>
+        </member>
+        <member name="P:UTN.Framework.Logging.Logger.Default">
+            <summary>
+            Gets the default publisher
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,5 @@
+INSERT INTO [dbo].[Materias] ([idmateria], [idcarrera], [descripcion], [cargahoraria], [cuatrimestre]) VALUES (1, 1, N'Programacion I', 4, 1)
+INSERT INTO [dbo].[Materias] ([idmateria], [idcarrera], [descripcion], [cargahoraria], [cuatrimestre]) VALUES (2, 1, N'Laboratorio I', 4, 1)
+INSERT INTO [dbo].[Materias] ([idmateria], [idcarrera], [descripcion], [cargahoraria], [cuatrimestre]) VALUES (3, 1, N'Ingles', 2, 1)
+INSERT INTO [dbo].[Materias] ([idmateria], [idcarrera], [descripcion], [cargahoraria], [cuatrimestre]) VALUES (4, 2, N'Investigacion Operativa II', 4, 1)
+INSERT INTO [dbo].[Materias] ([idmateria], [idcarrera], [descripcion], [cargahoraria], [cuatrimestre]) VALUES (5, 2, N'Programacion Avanzada', 4, 1)

@@ -1,0 +1,3 @@
+INSERT INTO [dbo].[Carreras] ([idCarrera], [descripcion], [duracion], [fechacreacion], [fechanovigencia], [ordenanza], [totalhoras], [cantmaterias]) VALUES (1, N'TSP', NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT INTO [dbo].[Carreras] ([idCarrera], [descripcion], [duracion], [fechacreacion], [fechanovigencia], [ordenanza], [totalhoras], [cantmaterias]) VALUES (2, N'TSI', NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT INTO [dbo].[Carreras] ([idCarrera], [descripcion], [duracion], [fechacreacion], [fechanovigencia], [ordenanza], [totalhoras], [cantmaterias]) VALUES (3, N'Lic. SI', NULL, NULL, NULL, NULL, NULL, NULL)

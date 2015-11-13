@@ -1,0 +1,13 @@
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Datos\bin\Debug\UTN.SistemaAlumnos.Datos.dll
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Datos\bin\Debug\UTN.SistemaAlumnos.Datos.pdb
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Datos\bin\Debug\log4net.dll
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Datos\bin\Debug\UTN.Framework.Data.dll
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Datos\bin\Debug\UTN.Framework.dll
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Datos\bin\Debug\UTN.SistemaAlumnos.Entidades.dll
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Datos\bin\Debug\UTN.SistemaAlumnos.Entidades.pdb
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Datos\bin\Debug\UTN.Framework.pdb
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Datos\bin\Debug\UTN.Framework.xml
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Datos\bin\Debug\UTN.Framework.Data.pdb
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Datos\obj\Debug\UTN.SistemaAlumnos.Datos.dll
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Datos\obj\Debug\UTN.SistemaAlumnos.Datos.pdb

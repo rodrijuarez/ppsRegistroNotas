@@ -1,0 +1,5 @@
+﻿CREATE PROCEDURE Profesores_TT
+AS
+BEGIN
+	SELECT * FROM Profesores
+END

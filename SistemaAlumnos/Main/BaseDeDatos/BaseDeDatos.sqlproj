@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>BaseDeDatos</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{066398ba-1199-4ca9-8538-37fbad435277}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>BaseDeDatos</RootNamespace>
+    <AssemblyName>BaseDeDatos</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Schema Objects\Schemas" />
+    <Folder Include="Schema Objects\Schemas\dbo" />
+    <Folder Include="Schema Objects\Schemas\dbo\Tables" />
+    <Folder Include="Scripts" />
+    <Folder Include="Scripts\Post-Deployment" />
+    <Folder Include="Scripts\Pre-Deployment" />
+    <Folder Include="Schema Objects" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Stored Procedures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\AcademicoPorExamen.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\AcademicoPorParcial.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Actas.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Alumnos.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Aspirantes.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\AuxiliarInscriptos.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Bibliografia.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Carreras.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Chequeras.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Correlatividades.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Correlatividades_Aprobada.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Correlatividades_Cursada.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Correlatividades_Rendir.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\InscriptosCursar.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\InscriptosRendir.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Materias.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\ParametrosSistema.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Profesores.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Provincias.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Sexo.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\TipoDocumento.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\TurnosCursar.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\TurnosRendir.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\UltimoTomoFolio.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Usuarios.table.sql" />
+    <Build Include="dbo\Stored Procedures\sp_alumnoPorLegajo.sql" />
+    <Build Include="dbo\Stored Procedures\sp_traerChequera.sql" />
+    <Build Include="dbo\Stored Procedures\sp_alumnoPorApellido.sql" />
+    <Build Include="dbo\Stored Procedures\insertarChequeras.sql" />
+    <Build Include="dbo\Stored Procedures\Academico_TxParcial.sql" />
+    <Build Include="dbo\Stored Procedures\Profesores_INS.sql" />
+    <Build Include="dbo\Stored Procedures\sp_carreras_traer.sql" />
+    <Build Include="dbo\Stored Procedures\sp_inscriptosCursar_modificarxinscriptoCursar.sql" />
+    <Build Include="dbo\Stored Procedures\sp_inscriptosCursar_traer.sql" />
+    <Build Include="dbo\Stored Procedures\sp_inscriptosCursar_modificarxinscriptoCursar.sql" />
+    <Build Include="dbo\Stored Procedures\sp_traerNotasParcial.sql" />
+    <Build Include="dbo\Stored Procedures\InscriptosCursar_TxTurno.sql" />
+    <Build Include="dbo\Stored Procedures\TurnosCursar_TxIdTurnosCursar.sql" />
+    <Build Include="dbo\Stored Procedures\Actas_TxIds.sql" />
+    <Build Include="dbo\Stored Procedures\TurnosCursar_TxIdMateria.sql" />
+    <Build Include="dbo\Stored Procedures\TurnosCursar_M.sql" />
+    <Build Include="dbo\Stored Procedures\TurnosCursar_A.sql" />
+    <Build Include="dbo\Stored Procedures\Profesores_T.sql" />
+    <Build Include="dbo\Stored Procedures\Materias_TxIdCarrera.sql" />
+    <Build Include="dbo\Stored Procedures\Carreras_T.sql" />
+    <Build Include="dbo\Stored Procedures\sp_materias_traerxidCarrera.sql" />
+    <Build Include="dbo\Stored Procedures\sp_materias_traerxidMateriaxTurno.sql" />
+    <Build Include="dbo\Stored Procedures\sp_materias_traerxidMateriaxTurnoxDivision.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\dbo.Carreras.data.sql" />
+    <None Include="Scripts\dbo.Materias.data.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Stored Procedures\sp_turnosCursar_traerxidMateria.sql" />
+  </ItemGroup>
+</Project>

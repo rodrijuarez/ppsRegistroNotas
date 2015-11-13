@@ -1,0 +1,5 @@
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Entidades\bin\Debug\UTN.SistemaAlumnos.Entidades.dll
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Entidades\bin\Debug\UTN.SistemaAlumnos.Entidades.pdb
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Entidades\obj\Debug\UTN.SistemaAlumnos.Entidades.dll
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\Entidades\obj\Debug\UTN.SistemaAlumnos.Entidades.pdb

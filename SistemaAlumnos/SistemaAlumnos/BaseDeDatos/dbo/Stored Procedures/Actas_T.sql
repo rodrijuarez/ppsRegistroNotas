@@ -1,0 +1,3 @@
+﻿CREATE PROCEDURE Actas_T
+AS
+SELECT * FROM Actas

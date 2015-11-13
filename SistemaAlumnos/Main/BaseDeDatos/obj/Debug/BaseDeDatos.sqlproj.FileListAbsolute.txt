@@ -1,0 +1,5 @@
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\BaseDeDatos\bin\Debug\BaseDeDatos.dacpac
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\BaseDeDatos\obj\Debug\BaseDeDatos.dll
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\BaseDeDatos\obj\Debug\BaseDeDatos.pdb
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\BaseDeDatos\bin\Debug\BaseDeDatos.dll
+C:\Users\alumno.LAB4PC\Desktop\SistemaAlumnos\Main\BaseDeDatos\bin\Debug\BaseDeDatos.pdb
